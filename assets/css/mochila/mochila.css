@@ -1,0 +1,11 @@
+.mochila {
+    background: #C5965F;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-grow: 1;
+    gap: 2em;
+    min-width: 600px;
+    padding: 4em 2em 2em;
+}
