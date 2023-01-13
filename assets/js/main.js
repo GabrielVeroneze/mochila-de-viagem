@@ -29,7 +29,7 @@ function criaElemento(nomeValor, quantidadeValor) {
     const quantidade = document.createElement('strong')
     quantidade.classList.add('lista__quantidade')
     quantidade.innerHTML = quantidadeValor
-    item.type = hide
+    
     item.appendChild(quantidade)
     item.innerHTML += nomeValor
         
