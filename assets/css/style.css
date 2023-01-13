@@ -7,13 +7,13 @@
 
 @import url('../css/lista/lista.css');
 @import url('../css/lista/lista-item.css');
-@import url('../css/lista/lista-unidade.css');
+@import url('../css/lista/lista-quantidade.css');
 
 
 body {
     background: radial-gradient(farthest-corner at right top,#21A09D, #06182D);
     font-family: 'Roboto', cursive;
-    height: 100%;
+    min-height: 100vh;
 }
 
 .principal {
