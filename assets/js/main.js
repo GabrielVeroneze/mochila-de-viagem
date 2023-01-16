@@ -21,7 +21,8 @@ form.addEventListener('submit', (evento) => {
 
 // Seleciona a lista
 const lista = document.querySelector('[data-lista]')
-// Array de objetos com o nome e quantidade dos items 
+
+// Array de objetos com os dados do item  
 const listaDados = []
 
 // Recebe o valor dos input para criar e adicionar os items na lista
@@ -40,13 +41,16 @@ function criaElemento(nomeValor, quantidadeValor) {
     lista.appendChild(item)
 
 
-    // objeto
+    // Objeto com o nome e quantidade dos items
     const itemDados = {
         'nome': nomeValor,
         'quantidade': quantidadeValor
     }
 
+    // Adiciona o objeto itemDados no array listaDados
     listaDados.push(itemDados)
 
+    // Armazena a chave 'item' e o valor 'listaDados' (array de objetos convertido em uma string JSON)
+    // Nota: As chaves e os valores armazenados devem estar no formato de string 
     localStorage.setItem('item', JSON.stringify(listaDados))
 }
