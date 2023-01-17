@@ -51,6 +51,6 @@ function criaElemento(nomeValor, quantidadeValor) {
     listaDados.push(itemDados)
 
     // Armazena a chave 'item' e o valor 'listaDados' (array de objetos convertido em uma string JSON)
-    // As chaves e os valores armazenados devem estar no formato de string 
+    // Os dados armazenados devem ser do tipo string
     localStorage.setItem('item', JSON.stringify(listaDados))
 }
