@@ -20,9 +20,11 @@ form.addEventListener("submit", (evento) => {
 // Seleciona a lista
 const lista = document.querySelector("[data-lista]")
 
-// Array de objetos com os dados do item
+// Array de objetos com os dados do item, captura a valor da chave 'item' armazenado se a chave não existir ele cria um array vazio
+// Depois que a página for recarregada irá pegar os dados dos item armazenado no localStorage
 const listaDados = JSON.parse(localStorage.getItem("item")) || []
 
+// Depois que a página for recarregada chama a função criaElemento() para cada item
 listaDados.forEach((dados) => {
   criaElemento(dados.nome, dados.quantidade)
 })
