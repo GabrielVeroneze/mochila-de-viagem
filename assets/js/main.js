@@ -4,8 +4,7 @@ const form = document.querySelector('[data-formulario="novoItem"]')
 const lista = document.querySelector("[data-lista]")
 // Array de objetos com os dados do item, recebe a valor da chave 'item' armazenado se ela existir, senão ele cria um array vazio
 // Depois que a página for recarregada irá pegar os dados dos item armazenado no localStorage
-const listaDados =
-    JSON.parse(localStorage.getItem("item")) === null ? [] : JSON.parse(localStorage.getItem("item"))
+const listaDados = JSON.parse(localStorage.getItem("item")) === null ? [] : JSON.parse(localStorage.getItem("item"))
 
 // Depois que a página for recarregada chama a função criaElemento() para cada item
 listaDados.forEach((dados) => {
@@ -27,13 +26,20 @@ form.addEventListener("submit", (evento) => {
         quantidade: quantidade.value,
     }
 
-    if (modificarQuantidade(itemDados) != true) {
+
+    // Verifica se o novo item adicionado já existe, senão retorna undefined    
+    const existe = listaDados.find(dados => dados.nome === nome.value)
+
+    if (existe === undefined) {  // Se o item não existir, ele cria
+        criaElemento(itemDados)
         // Adiciona o objeto itemDados no array listaDados
         listaDados.push(itemDados)
 
-        criaElemento(itemDados)
+    } else {                     // Se o item já existir, ele atualiza      
+        atualizaElemento(itemDados)
     }
-
+    
+    
     // Armazena a chave 'item' e o valor 'listaDados' (array de objetos convertido em uma string JSON)
     localStorage.setItem("item", JSON.stringify(listaDados))
 
@@ -44,13 +50,12 @@ form.addEventListener("submit", (evento) => {
 
 // Recebe os valores dos objeto itemDados para criar e adicionar os items na lista
 function criaElemento(itemValor) {
-    // console.log(itemValor.nome)
     const item = document.createElement("li")
-    item.setAttribute("class", "lista__item")
+    item.classList.add("lista__item")
 
     const quantidade = document.createElement("strong")
-    quantidade.setAttribute("class", "lista__quantidade")
-    quantidade.setAttribute("data-item", itemValor.nome)
+    quantidade.classList.add("lista__quantidade")
+    quantidade.dataset.id = itemValor.nome
     quantidade.innerHTML = itemValor.quantidade
 
     item.appendChild(quantidade)
@@ -59,20 +64,9 @@ function criaElemento(itemValor) {
     lista.appendChild(item)
 }
 
-function modificarQuantidade(itemDados) {
-    if (localStorage.getItem("item") !== null) {
-        for (let pos in listaDados) {
-            if (listaDados[pos].nome == itemDados.nome) {  
-                const quantidade = document.querySelector(`[data-item="${itemDados.nome}"]`)
-                let soma = Number(listaDados[pos].quantidade) + Number(itemDados.quantidade)
+// Atualiza a quantidade dos items
+function atualizaElemento(itemValor) {
+    const quantidade = document.querySelector(`[data-id="${itemValor.nome}"]`)
 
-                listaDados[pos].quantidade = soma.toString()
-                itemDados.quantidade = soma.toString()
-
-                quantidade.innerHTML = itemDados.quantidade
-
-                return true
-            }
-        }
-    }
+    quantidade.innerHTML = itemValor.quantidade
 }
