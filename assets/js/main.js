@@ -34,11 +34,18 @@ form.addEventListener("submit", (evento) => {
         criaElemento(itemDados)
         // Adiciona o objeto itemDados no array listaDados
         listaDados.push(itemDados)
-
+        
     } else {                     // Se o item já existir, ele atualiza      
         atualizaElemento(itemDados)
+
+        for (let i in listaDados) {
+            if (listaDados[i].nome === existe.nome) {
+                listaDados[i] = itemDados
+            }
+        }
     }
     
+    console.log(listaDados)
     
     // Armazena a chave 'item' e o valor 'listaDados' (array de objetos convertido em uma string JSON)
     localStorage.setItem("item", JSON.stringify(listaDados))
