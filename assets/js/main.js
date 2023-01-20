@@ -26,7 +26,6 @@ form.addEventListener("submit", (evento) => {
         quantidade: quantidade.value,
     }
 
-
     // Verifica se o novo item adicionado já existe, senão retorna undefined    
     const existe = listaDados.find(dados => dados.nome === nome.value)
 
@@ -34,7 +33,7 @@ form.addEventListener("submit", (evento) => {
         criaElemento(itemDados)
         // Adiciona o objeto itemDados no array listaDados
         listaDados.push(itemDados)
-        
+
     } else {                     // Se o item já existir, ele atualiza      
         atualizaElemento(itemDados)
 
@@ -44,9 +43,7 @@ form.addEventListener("submit", (evento) => {
             }
         }
     }
-    
-    console.log(listaDados)
-    
+        
     // Armazena a chave 'item' e o valor 'listaDados' (array de objetos convertido em uma string JSON)
     localStorage.setItem("item", JSON.stringify(listaDados))
 
