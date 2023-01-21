@@ -26,17 +26,19 @@ form.addEventListener("submit", (evento) => {
         quantidade: quantidade.value,
     }
 
-    // Verifica se o novo item adicionado já existe, senão retorna undefined    
+    // Retorna o novo item adicionado se ele existir, se ele não existir retorna undefined    
     const existe = listaDados.find(dados => dados.nome === nome.value)
 
     if (existe === undefined) {  // Se o item não existir, ele cria
         criaElemento(itemDados)
+
         // Adiciona o objeto itemDados no array listaDados
         listaDados.push(itemDados)
 
     } else {                     // Se o item já existir, ele atualiza      
         atualizaElemento(itemDados)
 
+        // Verifica se algum nome de 'listaDados' é igual o de existe, se sim, ele sobrescreve os valores do item
         for (let i in listaDados) {
             if (listaDados[i].nome === existe.nome) {
                 listaDados[i] = itemDados
@@ -73,4 +75,8 @@ function atualizaElemento(itemValor) {
     const quantidade = document.querySelector(`[data-id="${itemValor.nome}"]`)
 
     quantidade.innerHTML = itemValor.quantidade
+}
+
+function btnDeleta() {
+    
 }
