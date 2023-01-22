@@ -1,10 +1,10 @@
 // Seleciona o formulário
 const form = document.querySelector('[data-formulario="novoItem"]')
 // Seleciona a lista
-const lista = document.querySelector("[data-lista]")
+const lista = document.querySelector('[data-lista]')
 // Array de objetos com os dados do item, recebe a valor da chave 'item' armazenado se ela existir, senão ele cria um array vazio
 // Depois que a página for recarregada irá pegar os dados dos item armazenado no localStorage
-const listaDados = JSON.parse(localStorage.getItem("item")) === null ? [] : JSON.parse(localStorage.getItem("item"))
+const listaDados = JSON.parse(localStorage.getItem('item')) === null ? [] : JSON.parse(localStorage.getItem('item'))
 
 // Depois que a página for recarregada chama a função criaElemento() para cada item
 listaDados.forEach((dados) => {
@@ -12,13 +12,13 @@ listaDados.forEach((dados) => {
 })
 
 // O evento é acionado quando o formulário for enviado
-form.addEventListener("submit", (evento) => {
+form.addEventListener('submit', (evento) => {
     // Cancela o evento
     evento.preventDefault()
 
     // Seleciona o elemento dentro do formulario com o id ou name = "nome" e "quantidade"
-    const nome = evento.target.elements["nome"]
-    const quantidade = evento.target.elements["quantidade"]
+    const nome = evento.target.elements['nome']
+    const quantidade = evento.target.elements['quantidade']
 
     // Objeto com o nome e quantidade dos items
     const itemDados = {
@@ -26,8 +26,8 @@ form.addEventListener("submit", (evento) => {
         quantidade: quantidade.value,
     }
 
-    // Retorna o novo item adicionado se ele existir, se ele não existir retorna undefined    
-    const existe = listaDados.find(dados => dados.nome === nome.value)
+    // Retorna o novo item adicionado se ele existir, se ele não existir retorna undefined
+    const existe = listaDados.find((dados) => dados.nome === nome.value)
 
     if (existe === undefined) {  // Se o item não existir, ele cria
         criaElemento(itemDados)
@@ -35,7 +35,7 @@ form.addEventListener("submit", (evento) => {
         // Adiciona o objeto itemDados no array listaDados
         listaDados.push(itemDados)
 
-    } else {                     // Se o item já existir, ele atualiza      
+    } else {                     // Se o item já existir, ele atualiza
         atualizaElemento(itemDados)
 
         // Verifica se algum nome de 'listaDados' é igual o de existe, se sim, ele sobrescreve os valores do item
@@ -45,27 +45,28 @@ form.addEventListener("submit", (evento) => {
             }
         }
     }
-        
+
     // Armazena a chave 'item' e o valor 'listaDados' (array de objetos convertido em uma string JSON)
-    localStorage.setItem("item", JSON.stringify(listaDados))
+    localStorage.setItem('item', JSON.stringify(listaDados))
 
     // Apaga o valor dos input
-    nome.value = ""
-    quantidade.value = ""
+    nome.value = ''
+    quantidade.value = ''
 })
 
 // Recebe os valores dos objeto itemDados para criar e adicionar os items na lista
 function criaElemento(itemValor) {
-    const item = document.createElement("li")
-    item.classList.add("lista__item")
+    const item = document.createElement('li')
+    item.classList.add('lista__item')
 
-    const quantidade = document.createElement("strong")
-    quantidade.classList.add("lista__quantidade")
+    const quantidade = document.createElement('strong')
+    quantidade.classList.add('lista__quantidade')
     quantidade.dataset.id = itemValor.nome
     quantidade.innerHTML = itemValor.quantidade
 
     item.appendChild(quantidade)
     item.innerHTML += itemValor.nome
+    item.appendChild(botaoDeleta())
 
     lista.appendChild(item)
 }
@@ -77,6 +78,27 @@ function atualizaElemento(itemValor) {
     quantidade.innerHTML = itemValor.quantidade
 }
 
-function btnDeleta() {
+function botaoDeleta() {
+    const botao = document.createElement('button')
+    botao.innerText = 'X'
+
+    botao.addEventListener('click', function() {
+        deletaElemento(this.parentNode, this.previousElementSibling.dataset.id)
+    })
+
+    return botao
+}
+
+function deletaElemento(item, id) {
+    item.remove()
+
+    // console.log(item)
+    // console.log(id)
+
+    const indice = listaDados.findIndex(dados => dados.nome === id)
     
+    listaDados.splice(indice, 1)
+
+    console.log(listaDados)
+    // console.log()
 }
