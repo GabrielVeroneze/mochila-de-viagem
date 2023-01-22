@@ -99,6 +99,5 @@ function deletaElemento(item, id) {
     
     listaDados.splice(indice, 1)
 
-    console.log(listaDados)
-    // console.log()
+    localStorage.setItem('item', JSON.stringify(listaDados))
 }
