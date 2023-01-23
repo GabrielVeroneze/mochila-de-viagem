@@ -79,9 +79,11 @@ function atualizaElemento(itemValor) {
 }
 
 function botaoDeleta() {
+    // Cria um botao de deletar os items
     const botao = document.createElement('button')
     botao.innerText = 'X'
 
+    // Adiciona evento de clique no botão e chama a função deletaElemento()
     botao.addEventListener('click', function() {
         deletaElemento(this.parentNode, this.previousElementSibling.dataset.id)
     })
@@ -89,15 +91,17 @@ function botaoDeleta() {
     return botao
 }
 
+// 1º Parâmetro: elemento pai <li> do botão clicado | 2º Parâmetro: data-id do elemento irmão <strong> do botão clicado
 function deletaElemento(item, id) {
+    // Remove o item do DOM
     item.remove()
 
-    // console.log(item)
-    // console.log(id)
-
-    const indice = listaDados.findIndex(dados => dados.nome === id)
+    // Retorna o índice do dado que tiver o nome igual o id
+    const dadoIndice = listaDados.findIndex(dados => dados.nome === id)
     
-    listaDados.splice(indice, 1)
+    // Remove o dado da lista a partir do indice inserido  
+    listaDados.splice(dadoIndice, 1)
 
+    // Armazena a listaDados atualizada, sem os dados removidos
     localStorage.setItem('item', JSON.stringify(listaDados))
 }
