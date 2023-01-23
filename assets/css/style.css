@@ -20,5 +20,11 @@ body {
     align-items: flex-start;
     display: flex;
     gap: 2em;
-    padding: 10vh 3em 0;
+    padding: 10vh 3em 3rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .principal {
+        flex-direction: column;
+    }
 }

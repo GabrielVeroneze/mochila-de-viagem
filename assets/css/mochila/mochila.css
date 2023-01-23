@@ -9,3 +9,16 @@
     min-width: 600px;
     padding: 4em 2em 2em;
 }
+
+@media screen and (max-width: 1024px) {
+    .mochila {
+        min-width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mochila {
+        align-items: center;
+        flex-direction: column;
+    }
+}
