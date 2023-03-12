@@ -2,7 +2,7 @@
 
 <p align="center">Este projeto consiste em criar uma aplicação para gerenciar uma lista de itens que devem ser levados em uma viagem.</p>
 
-<p align="center">O usuário pode adicionar itens à lista, bem como removê-los. Os itens são armazenados no `localStorage`.</p>
+<span align="center">O usuário pode adicionar itens à lista, bem como removê-los. Os itens são armazenados no `localStorage`.</span>
 
 <p align="center">O objetivo principal do projeto é ajudar os usuários a se prepararem melhor para viagens, garantindo que eles tenham tudo o que precisam e evitando esquecimentos e problemas de última hora.</p>
 
